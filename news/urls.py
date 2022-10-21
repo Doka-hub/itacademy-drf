@@ -4,5 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    path('news-create/', views.news_create)
+    path('news-create/', views.news_create),
+    path('news-list/', views.NewsListAPIView.as_view())
 ]

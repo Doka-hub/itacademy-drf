@@ -3,8 +3,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.serializers import Serializer, CharField, IntegerField
 from .models import Category, News
-from .serializers import NewsCreateSerializer, NewsListSerializer
-from rest_framework.generics import ListAPIView, ListCreateAPIView
+from .serializers import NewsCreateSerializer, NewsListSerializer, NewsDetailSerializer, NewsDeleteSerializer
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, DestroyAPIView
+
+
+class NewsDeleteAPIView(DestroyAPIView):
+    serializer_class = NewsDeleteSerializer
+    queryset = News.objects.all()
+
+
+class NewsRetrieveAPIView(RetrieveAPIView):
+    serializer_class = NewsDetailSerializer
+    queryset = News.objects.all()
 
 
 class NewsListAPIView(ListCreateAPIView):
@@ -32,6 +42,8 @@ def news_create(request):
     )
 
     return Response(serializer.data)
+
+
 
 
 
